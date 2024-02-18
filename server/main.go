@@ -62,7 +62,7 @@ func main() {
 
 		for index, todo := range todos { //Loop through all todos, find id and mark done
 			if todo.ID == id {
-				todos[index].Completed = true
+				todos[index].Completed = !todos[index].Completed
 				break
 			}
 		}

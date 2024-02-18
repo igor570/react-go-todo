@@ -15,4 +15,9 @@ export type createTodoProps = {
   mutate: KeyedMutator<Todo[]>;
 };
 
+export interface TodoItemProps {
+  todo: Todo;
+  mutate: KeyedMutator<Todo[]>;
+}
+
 export type TodoMutateFunction = KeyedMutator<Todo[]>;

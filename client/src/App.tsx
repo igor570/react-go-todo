@@ -1,9 +1,8 @@
-import { Box, List, ListItem } from "@chakra-ui/react";
 import useSWR from "swr";
 import { ENDPOINT } from "./lib/constants";
-import AddTodo from "./components/AddTodo";
+import { Header } from "./components/Header";
 import { Todo } from "./lib/types";
-import { markTodoComplete, deleteTodo } from "./lib/functions";
+import { TodoItem } from "./components/TodoItem";
 
 const fetcher = (url: string) =>
   fetch(`${ENDPOINT}/${url}`).then((response) => response.json());
@@ -13,26 +12,10 @@ function App() {
 
   return (
     <>
-      <List>
-        {data?.map((todo) => {
-          return (
-            <ListItem
-              color={todo.completed ? "red" : "black"}
-              onClick={() => markTodoComplete(todo.id, mutate)}
-              key={`todo__${todo.id}`}
-            >
-              {todo.title}
-              <Box
-                onClick={() => deleteTodo(todo.id, mutate)}
-                backgroundColor="purple"
-                width={"1rem"}
-                height={"1rem"}
-              ></Box>
-            </ListItem>
-          );
-        })}
-      </List>
-      <AddTodo mutate={mutate} />
+      <Header mutate={mutate} />
+      {data?.map((todo) => (
+        <TodoItem key={todo.id} todo={todo} mutate={mutate} />
+      ))}
     </>
   );
 }
